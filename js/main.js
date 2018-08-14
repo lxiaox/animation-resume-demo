@@ -1,4 +1,21 @@
-let css1 =`/* 
+let css1, css2, css3, markdown
+init()
+writeCss('', css1, ()=>{
+    createPaper( ()=>{
+        writeMarkdown(markdown, ()=>{
+            writeCss(css1,css2,()=> {
+                markdownToHtml(() => {
+                    writeCss(css1 + css2, css3)
+                })
+            })
+        })
+    })
+})
+
+
+/*******     以下为函数      *********/
+function init() {
+    css1 = `/* 
  * 面试官您好，我是刘潇潇
  * 只用文字作做我介绍太单调了
  * 我就用代码来介绍吧
@@ -52,7 +69,7 @@ html{
 
 /* 于是我就可以在白纸上写字了，请看右边 */`
 
-let markdown = `
+    markdown = `
 # 自我介绍
 
 我叫 刘潇潇  1998 年 10 月出生 长沙理工大学学生
@@ -74,7 +91,7 @@ let markdown = `
 - Email xxxxxxxx
 - 手机 xxxxxxx
 `
-let css2 = `
+    css2 = `
 
 /* 
  * 这个简历好像差点什么
@@ -83,7 +100,7 @@ let css2 = `
  */
 
 `
-let css3 = `
+    css3 = `
 
 
 /*
@@ -91,18 +108,7 @@ let css3 = `
  * 谢谢观看
  */
 `
-
-writeCss('', css1, ()=>{
-    createPaper( ()=>{
-        writeMarkdown(markdown, ()=>{
-            writeCss(css1,css2,()=> {
-                markdownToHtml(() => {
-                    writeCss(css1 + css2, css3)
-                })
-            })
-        })
-    })
-})
+}
 
 function writeCss(prefix,newCss,fn) {
     let n = 0
@@ -118,7 +124,6 @@ function writeCss(prefix,newCss,fn) {
         }
     }, 10)
 }
-
 
 function createPaper(fn) {
     let paper = document.createElement('div')
